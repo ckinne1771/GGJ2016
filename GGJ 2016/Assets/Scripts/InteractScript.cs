@@ -19,19 +19,29 @@ public class InteractScript : MonoBehaviour {
 	
 	}
 
-	void onTriggerEnter()
+	void OnTriggerEnter( Collider other)
 	{
+		interactObject = other.gameObject;
+		Debug.Log ("Check");
 		
 	}
 
-	void onTriggerStay()
+	void OnTriggerStay(Collider other)
 	{
+		dialogue.text = "Press E to Interact";
+
+		if (Input.GetButtonDown("Interact"))
+			{
+				Debug.Log("Beep");
+			}
 		
 	}
 
-	void onTriggerExit()
+	void OnTriggerExit(Collider other)
 	{
-		
+		interactObject = null;
+		Debug.Log ("Goodbye");
+		dialogue.text = "";
 	}
 
 }
