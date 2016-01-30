@@ -57,6 +57,11 @@ public class SpellCombinationScript : MonoBehaviour {
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 1;
 
+	//Psy Spell
+	public bool isPsy;
+	public float psyLimit;
+
+
 	//public camera Camera;
 	//private movement FirstPersonController;
 
@@ -76,8 +81,10 @@ public class SpellCombinationScript : MonoBehaviour {
 
         //drunkMathew setup
         drunkTimer = 3;
+
         fpCamera.GetComponent<MotionBlur>().enabled = false;
 		
+		psyLimit = 5;
 	}
 	
 	// Update is called once per frame
@@ -87,6 +94,7 @@ public class SpellCombinationScript : MonoBehaviour {
 	Screaming ();
     drunkMathew();
     quakeState();
+		psySpell ();
     //paralysis ();
 
     if(Input.GetKeyDown(KeyCode.Alpha1))
@@ -422,5 +430,33 @@ else
             shake = 0;
         }
     }
+
+	void psySpell()
+	{
+		/*if(Input.GetKeyDown(KeyCode.L))
+			{
+			fpCamera.GetComponent<ColorCorrectionCurves> ().enabled = true;
+			
+
+	
+			}*/
+
+		if(Input.GetKeyDown(KeyCode.L))
+		{
+			fpCamera.GetComponent<ColorCorrectionCurves>().enabled = true;
+		}
+
+		if (fpCamera.GetComponent<ColorCorrectionCurves>().enabled == true)
+		{
+			psyLimit -= Time.deltaTime;
+		}
+
+		if (psyLimit <= 0)
+		{
+			fpCamera.GetComponent<ColorCorrectionCurves>().enabled = false;
+			psyLimit = 5;
+		}
+	
+	}
 
 }
