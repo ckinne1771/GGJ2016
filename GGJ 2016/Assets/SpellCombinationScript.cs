@@ -33,7 +33,7 @@ public class SpellCombinationScript : MonoBehaviour {
 	public bool isBlinded = false;
 
     private bool flashBool = false;
-	public CanvasGroup flash;
+
 
 
 	public GameObject flash;
@@ -209,16 +209,7 @@ public class SpellCombinationScript : MonoBehaviour {
             selfLight.SetActive(false);
             lightTimer = 10;
         }
-        if(flashBool ==true)
-        {
-            flash.alpha -= Time.deltaTime;
-            if(flash.GetComponent<CanvasGroup>().alpha <= 0)
-            {
-                flash.alpha = 0;
-                flashBool = false;
-               
-            }
-        }
+
 			
 	}
 
@@ -286,7 +277,7 @@ public class SpellCombinationScript : MonoBehaviour {
 	{
         if (spellCombinations[0] == 3 && spellCombinations[1] == 1 && spellCombinations[2] == 2) 
 		{
-            flash.alpha = 255;
+           
             flashBool = true;
 			Debug.Log ("FLASH !");
 		}
