@@ -39,6 +39,10 @@ public class SpellCombinationScript : MonoBehaviour {
 	public GameObject flash;
 	public GameObject scream;
 
+	public GameObject smoke;
+	private bool smokeActive = false;
+
+
 
 	public AudioClip screaming;
 
@@ -57,8 +61,10 @@ public class SpellCombinationScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         HeartParticles.SetActive(false);
+		smoke.SetActive(false);
 
 
+		flash.SetActive (false);
 
         selfLight.SetActive(false);
 
@@ -156,6 +162,7 @@ public class SpellCombinationScript : MonoBehaviour {
                 hearts();
                 light();
                 Flashed();
+				smokebomb ();
                 spellCombinations.Clear();
                 spellsSelected = 0;
             }
@@ -312,6 +319,27 @@ public class SpellCombinationScript : MonoBehaviour {
 			GetComponent<AudioSource> ().PlayOneShot (screaming);
 			Debug.Log ("AAAAAAAGGGGGGHHHHHHHHHHHH!!!!!!!!!!");
 		}
+	}
+
+	void smokebomb()
+	{
+		if (spellCombinations[0] == 2 && spellCombinations[1] == 3 && spellCombinations[2] == 1) 
+		{
+			smokeActive = !smokeActive;
+
+			if (smokeActive) {
+
+				smoke.SetActive(true);
+				Debug.Log ("Puff");
+
+
+			} 
+
+
+
+
+		}
+		
 	}
 
 }
