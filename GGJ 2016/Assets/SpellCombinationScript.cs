@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -16,8 +16,20 @@ public class SpellCombinationScript : MonoBehaviour {
     int spellsSelected = 0;
 
 	public GameObject player;
+
     public float freezeTimer = 3.0f;
     private bool isFrozen = false;
+
+
+	public Camera cam;
+	public bool isFrozen = false;
+	public bool isBlinded = false;
+
+
+
+	//public camera Camera;
+
+
 
 
 	//private movement FirstPersonController;
@@ -33,7 +45,10 @@ public class SpellCombinationScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		
+
+		paralysis ();
+		blindness ();
+
 
 	if(Input.GetKeyDown(KeyCode.Alpha1))
     {
@@ -133,8 +148,41 @@ public class SpellCombinationScript : MonoBehaviour {
 		if (spellCombinations[0] == 2 && spellCombinations[1] == 1 && spellCombinations[2] == 3) 
 		{
 					Debug.Log ("Your Frozen Bitch");
+
 					player.GetComponent<FirstPersonController> ().enabled = false;
                     isFrozen = true;
+
+
+		}
+	}
+
+	void blindness ()
+	{
+
+		if (Input.GetButtonDown ("Fire1")) 
+		{
+			isBlinded = !isBlinded;
+
+			if (isBlinded) {
+
+				isBlinded = true;
+				Debug.Log ("IM BLIND, BBBLLLLIIIIINNNDDDDD !!!!!!!");
+
+				//camera = GetComponentsInChildren<Camera>();
+				//cam = GetComponent<Camera>().cullingMask = 0;
+				//cam = GetComponent<Camera>().enabled = false;
+			
+
+
+			} 
+			else 
+			{
+				isBlinded = false;
+				//cam = GetComponent<Camera>().cullingMask = "Everything";
+				//cam = GetComponent<Camera>().enabled = true;
+
+
+			}
 
 
 		}
