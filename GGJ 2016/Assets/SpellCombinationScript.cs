@@ -22,7 +22,7 @@ public class SpellCombinationScript : MonoBehaviour {
 
 
 	public Camera cam;
-	public bool isFrozen = false;
+
 	public bool isBlinded = false;
 
 
@@ -46,7 +46,7 @@ public class SpellCombinationScript : MonoBehaviour {
 	void Update () {
 
 
-		paralysis ();
+		//paralysis ();
 		blindness ();
 
 
@@ -159,7 +159,7 @@ public class SpellCombinationScript : MonoBehaviour {
 	void blindness ()
 	{
 
-		if (Input.GetButtonDown ("Fire1")) 
+		if (Input.GetKeyDown("r")) 
 		{
 			isBlinded = !isBlinded;
 
@@ -171,15 +171,17 @@ public class SpellCombinationScript : MonoBehaviour {
 				//camera = GetComponentsInChildren<Camera>();
 				//cam = GetComponent<Camera>().cullingMask = 0;
 				//cam = GetComponent<Camera>().enabled = false;
-			
+				cam.cullingMask = (0);
 
 
 			} 
 			else 
 			{
 				isBlinded = false;
+				cam.cullingMask = (1);
 				//cam = GetComponent<Camera>().cullingMask = "Everything";
 				//cam = GetComponent<Camera>().enabled = true;
+
 
 
 			}
