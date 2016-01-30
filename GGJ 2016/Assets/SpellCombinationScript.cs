@@ -71,7 +71,7 @@ public class SpellCombinationScript : MonoBehaviour {
 
 		
 
-		Flashed ();
+		//Flashed ();
 		Screaming ();
 
 		//paralysis ();
