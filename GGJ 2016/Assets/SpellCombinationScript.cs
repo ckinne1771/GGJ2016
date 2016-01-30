@@ -19,12 +19,15 @@ public class SpellCombinationScript : MonoBehaviour {
 
     public float freezeTimer = 3.0f;
     public float blindTimer = 4.0f;
+    public float heartTimer = 5.0f;
     private bool isFrozen = false;
-
+    public GameObject HeartParticles;
 
 	public Camera cam;
 
+    private bool heartActive = false;
 	public bool isBlinded = false;
+
 
 
 
@@ -39,7 +42,7 @@ public class SpellCombinationScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        HeartParticles.SetActive(false);
 		
 	}
 	
@@ -126,6 +129,7 @@ public class SpellCombinationScript : MonoBehaviour {
                 Debug.Log("Spell Cast" + spellCombinations[0].ToString() + spellCombinations[1].ToString() + spellCombinations[2].ToString());
                 paralysis();
                 blindness();
+                hearts();
                 spellCombinations.Clear();
                 spellsSelected = 0;
             }
@@ -153,7 +157,19 @@ public class SpellCombinationScript : MonoBehaviour {
             isBlinded = false;
             isBlinded = false;
             cam.cullingMask = (1);
-            blindTimer = 3;
+            blindTimer = 4;
+        }
+        if (heartActive == true && heartTimer > 0)
+        {
+            heartTimer -= Time.deltaTime;
+            Debug.Log(blindTimer.ToString());
+        }
+        else if (heartTimer <= 0)
+        {
+            
+            heartActive = false;
+            HeartParticles.SetActive(false);
+            heartTimer = 5;
         }
 			
 	}
@@ -171,25 +187,47 @@ public class SpellCombinationScript : MonoBehaviour {
 		}
 	}
 
-	void blindness ()
+    void blindness()
+    {
+
+        if (spellCombinations[0] == 3 && spellCombinations[1] == 2 && spellCombinations[2] == 1)
+        {
+            isBlinded = !isBlinded;
+
+            if (isBlinded)
+            {
+
+                isBlinded = true;
+                Debug.Log("IM BLIND, BBBLLLLIIIIINNNDDDDD !!!!!!!");
+
+                //camera = GetComponentsInChildren<Camera>();
+                //cam = GetComponent<Camera>().cullingMask = 0;
+                //cam = GetComponent<Camera>().enabled = false;
+                cam.cullingMask = (0);
+
+
+            }
+
+
+        }
+    }
+
+        void hearts ()
 	{
 
-        if (spellCombinations[0] == 3 && spellCombinations[1] == 2 && spellCombinations[2] == 1) 
+        if (spellCombinations[0] == 2 && spellCombinations[1] == 3 && spellCombinations[2] == 1) 
 		{
-			isBlinded = !isBlinded;
+			heartActive = !heartActive;
 
-			if (isBlinded) {
+			if (heartActive) {
 
-				isBlinded = true;
-				Debug.Log ("IM BLIND, BBBLLLLIIIIINNNDDDDD !!!!!!!");
-
-				//camera = GetComponentsInChildren<Camera>();
-				//cam = GetComponent<Camera>().cullingMask = 0;
-				//cam = GetComponent<Camera>().enabled = false;
-				cam.cullingMask = (0);
+                HeartParticles.SetActive(true);
+				Debug.Log ("GLORIOUS HEARTS!!!!");
 
 
 			} 
+
+           
 		
 
 		}
