@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -22,8 +22,11 @@ public class SpellCombinationScript : MonoBehaviour {
     public float blindTimer = 4.0f;
     public float heartTimer = 5.0f;
     private bool isFrozen = false;
-    public GameObject HeartParticles;
+    private bool isAlight = false;
+    public float lightTimer = 10.0f;
 
+    public GameObject HeartParticles;
+    public GameObject selfLight;
 	public Camera cam;
 
     private bool heartActive = false;
@@ -48,7 +51,11 @@ public class SpellCombinationScript : MonoBehaviour {
 	void Start () {
         HeartParticles.SetActive(false);
 
+
 		flash.SetActive (false);
+
+        selfLight.SetActive(false);
+
 		
 	}
 	
@@ -136,6 +143,7 @@ public class SpellCombinationScript : MonoBehaviour {
                 paralysis();
                 blindness();
                 hearts();
+                light();
                 spellCombinations.Clear();
                 spellsSelected = 0;
             }
@@ -176,6 +184,18 @@ public class SpellCombinationScript : MonoBehaviour {
             heartActive = false;
             HeartParticles.SetActive(false);
             heartTimer = 5;
+        }
+        if (isAlight == true && lightTimer > 0)
+        {
+           lightTimer -= Time.deltaTime;
+           // Debug.Log(blindTimer.ToString());
+        }
+        else if (lightTimer <= 0)
+        {
+
+            isAlight = false;
+            selfLight.SetActive(false);
+            lightTimer = 10;
         }
 			
 	}
@@ -239,6 +259,7 @@ public class SpellCombinationScript : MonoBehaviour {
 		}
 	}
 
+
 	void Flashed()
 	{
 		if (Input.GetKeyDown (KeyCode.F)) 
@@ -247,4 +268,27 @@ public class SpellCombinationScript : MonoBehaviour {
 			Debug.Log ("FLASH !");
 		}
 	}
+
+    void light()
+        {
+
+            if (spellCombinations[0] == 1 && spellCombinations[1] == 2 && spellCombinations[2] == 3)
+            {
+                isAlight = !isAlight;
+
+                if (isAlight)
+                {
+
+                    selfLight.SetActive(true);
+                    Debug.Log("ILLUMINATION!!!!");
+
+
+                }
+
+
+
+
+            }
+        }
+
 }
