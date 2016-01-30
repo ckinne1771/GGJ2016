@@ -88,59 +88,48 @@ public class SpellCombinationScript : MonoBehaviour {
     {
         if (spellsSelected < 3)
         {
-            if (element1Active == false)
-            {
-                element1Active = true;
+           
+               
                 int el1 = 1;
                 spellCombinations.Add(el1);
                 spellsSelected++;
             }
-            else{
-                Debug.Log("Spell Already Selected");
-            }
-        }
+          
+        
         else
         {
             Debug.Log("Spell Combinations Maxed");
         }
     }
+
     if (Input.GetKeyDown(KeyCode.Alpha2))
     {
         if (spellsSelected < 3)
         {
-            if (element2Active == false)
-            {
-                element2Active = true;
-                int el2 = 2;
-                spellCombinations.Add(el2);
-                spellsSelected++;
-            }
-            else
-            {
-                Debug.Log("Spell Already Selected");
-            }
+
+
+            int el2 = 2;
+            spellCombinations.Add(el2);
+            spellsSelected++;
         }
+
+
         else
         {
             Debug.Log("Spell Combinations Maxed");
         }
     }
+    
     if (Input.GetKeyDown(KeyCode.Alpha3))
     {
 
         if (spellsSelected < 3)
         {
-            if (element3Active == false)
-            {
-                element3Active = true;
+            
                 int el3 = 3;
                 spellCombinations.Add(el3);
                 spellsSelected++;
-            }
-            else
-            {
-                Debug.Log("Spell Already Selected");
-            }
+            
         }
         else
         {
@@ -150,21 +139,28 @@ public class SpellCombinationScript : MonoBehaviour {
 
         if(Input.GetMouseButtonDown(0))
         {
-            if(element1Active == true && element2Active == true && element3Active == true)
+            if(spellsSelected==3)
             {
-                element1Active = false;
-                element2Active = false;
-                element3Active = false;
+              
 
                 Debug.Log("Spell Cast" + spellCombinations[0].ToString() + spellCombinations[1].ToString() + spellCombinations[2].ToString());
-                paralysis();
+            /*    paralysis();
                 blindness();
                 hearts();
                 light();
-                Flashed();
-				smokebomb ();
+                Flashed();*/
+
+                if (paralysis() == false && blindness() == false && hearts() == false && light() == false && Flashed() == false)
+                {
+                    smokebomb();
+                }
+                
                 spellCombinations.Clear();
                 spellsSelected = 0;
+            }
+            else
+            {
+                Debug.Log("Not enough spells selected");
             }
         }
 
@@ -220,7 +216,7 @@ public class SpellCombinationScript : MonoBehaviour {
 			
 	}
 
-	void paralysis ()
+	bool paralysis ()
 	{
 		if (spellCombinations[0] == 2 && spellCombinations[1] == 1 && spellCombinations[2] == 3) 
 		{
@@ -228,12 +224,16 @@ public class SpellCombinationScript : MonoBehaviour {
 
 					player.GetComponent<FirstPersonController> ().enabled = false;
                     isFrozen = true;
-
+                    return true;
 
 		}
+        else
+        {
+            return false;
+        }
 	}
 
-    void blindness()
+    bool blindness()
     {
 
         if (spellCombinations[0] == 3 && spellCombinations[1] == 2 && spellCombinations[2] == 1)
@@ -250,15 +250,23 @@ public class SpellCombinationScript : MonoBehaviour {
                 //cam = GetComponent<Camera>().cullingMask = 0;
                 //cam = GetComponent<Camera>().enabled = false;
                 cam.cullingMask = (0);
-
+                return true;
 
             }
-
+            else
+            {
+                return false;
+            }
+        }
+            else
+            {
+                return false;
+            }
 
         }
-    }
+    
 
-        void hearts ()
+        bool hearts ()
 	{
 
         if (spellCombinations[0] == 2 && spellCombinations[1] == 3 && spellCombinations[2] == 1) 
@@ -269,28 +277,42 @@ public class SpellCombinationScript : MonoBehaviour {
 
                 HeartParticles.SetActive(true);
 				Debug.Log ("GLORIOUS HEARTS!!!!");
+                return true;
 
-
-			} 
+			}
+            else
+            {
+                return false;
+            }
 
            
 		
 
 		}
+else
+        {
+            return false;
+        }
+
 	}
 
 
-	void Flashed()
+	bool Flashed()
 	{
         if (spellCombinations[0] == 3 && spellCombinations[1] == 1 && spellCombinations[2] == 2) 
 		{
            
             flashBool = true;
 			Debug.Log ("FLASH !");
+            return true;
 		}
+        else
+        {
+            return false;
+        }
 	}
 
-    void light()
+    bool light()
         {
 
             if (spellCombinations[0] == 1 && spellCombinations[1] == 2 && spellCombinations[2] == 3)
@@ -302,28 +324,39 @@ public class SpellCombinationScript : MonoBehaviour {
 
                     selfLight.SetActive(true);
                     Debug.Log("ILLUMINATION!!!!");
+                    return true;
 
-
+                }
+                else
+                {
+                    return false;
                 }
 
 
-
-
+            }
+else
+            {
+                return false;
             }
         }
 
-	void Screaming()
+	bool Screaming()
 	{
 		if (Input.GetKeyDown (KeyCode.Q))
 		{
 			GetComponent<AudioSource> ().PlayOneShot (screaming);
 			Debug.Log ("AAAAAAAGGGGGGHHHHHHHHHHHH!!!!!!!!!!");
+            return true;
 		}
+        else
+        {
+            return false;
+        }
 	}
 
 	void smokebomb()
 	{
-		if (spellCombinations[0] == 2 && spellCombinations[1] == 3 && spellCombinations[2] == 1) 
+		if (spellCombinations[0] == 2 && spellCombinations[1] == 1 && spellCombinations[2] == 3) 
 		{
 			smokeActive = !smokeActive;
 
