@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class SpellCombinationScript : MonoBehaviour {
 
@@ -14,14 +15,26 @@ public class SpellCombinationScript : MonoBehaviour {
     bool maxSelection = false;
     int spellsSelected = 0;
 
+	public GameObject player;
+	public bool isFrozen = false;
+
+
+
+	//private movement FirstPersonController;
+
+
 
 	// Use this for initialization
 	void Start () {
-	
+		
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		paralysis ();
+
 	if(Input.GetKeyDown(KeyCode.Alpha1))
     {
         if (spellsSelected < 3)
@@ -39,7 +52,7 @@ public class SpellCombinationScript : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Spell COmbinations Maxed");
+            Debug.Log("Spell Combinations Maxed");
         }
     }
     if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -60,7 +73,7 @@ public class SpellCombinationScript : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Spell COmbinations Maxed");
+            Debug.Log("Spell Combinations Maxed");
         }
     }
     if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -82,7 +95,7 @@ public class SpellCombinationScript : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Spell COmbinations Maxed");
+            Debug.Log("Spell Combinations Maxed");
         }
     }
 
@@ -99,5 +112,29 @@ public class SpellCombinationScript : MonoBehaviour {
                 spellsSelected = 0;
             }
         }
+			
+	}
+
+	void paralysis ()
+	{
+		if (Input.GetButtonDown ("Freeze")) 
+		{
+			isFrozen = !isFrozen;
+
+			if (isFrozen) {
+				
+					isFrozen = true;
+					Debug.Log ("Your Frozen Bitch");
+					player.GetComponent<FirstPersonController> ().enabled = false;
+
+			} else 
+			{
+				isFrozen = false;
+				player.GetComponent<FirstPersonController> ().enabled = true;
+
+			}
+
+
+		}
 	}
 }
