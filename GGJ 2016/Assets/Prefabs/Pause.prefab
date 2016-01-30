@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonLayout: {fileID: 172404}
-  playersControl: {fileID: 0}
+  playersControl: {fileID: 165456, guid: 9702c952554d8d047b215aa2182af421, type: 2}
 --- !u!114 &11481054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -350,7 +350,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: playersControl
+      value: 
+      objectReference: {fileID: 165456, guid: 9702c952554d8d047b215aa2182af421, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 138938}

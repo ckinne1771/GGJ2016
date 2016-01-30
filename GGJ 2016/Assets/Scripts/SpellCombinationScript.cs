@@ -35,9 +35,6 @@ public class SpellCombinationScript : MonoBehaviour {
 
     private bool flashBool = false;
 
-
-
-	public GameObject flash;
 	public GameObject scream;
 
 	public GameObject smoke;
@@ -45,9 +42,15 @@ public class SpellCombinationScript : MonoBehaviour {
 
 	public AudioClip screaming;
 
+    public GameObject fpCamera;
+
+    //Flashed Spell Update
+    public BloomAndFlares BandF;
+    public GameObject flash1stEffect;
+    public float flash1stEffectTimer;
+
     //drunkMathew var.
     public float drunkTimer;
-    public GameObject fpCamera;
 
     //QuakeState var.
     public float shake = 0;
@@ -62,10 +65,14 @@ public class SpellCombinationScript : MonoBehaviour {
         HeartParticles.SetActive(false);
 		smoke.SetActive(false);
 
-
-		flash.SetActive (false);
-
         selfLight.SetActive(false);
+        
+        //flashed Effect 1 setup
+        flash1stEffect.SetActive(false);
+        flash1stEffectTimer = 1;
+        //flashed Effect 2 setup
+        BandF = fpCamera.GetComponent<BloomAndFlares>();
+        BandF.bloomIntensity = 0;
 
         //drunkMathew setup
         drunkTimer = 3;
@@ -76,29 +83,20 @@ public class SpellCombinationScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+	//Flashed ();
+	Screaming ();
+    drunkMathew();
+    quakeState();
+    //paralysis ();
 
-		
-
-		//Flashed ();
-		Screaming ();
-        drunkMathew();
-        quakeState();
-		//paralysis ();
-	
-
-
-	if(Input.GetKeyDown(KeyCode.Alpha1))
-    {
+    if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
         if (spellsSelected < 3)
         {
-           
-               
-                int el1 = 1;
-                spellCombinations.Add(el1);
-                spellsSelected++;
-            }
-          
-        
+            int el1 = 1;
+            spellCombinations.Add(el1);
+            spellsSelected++;
+        }
         else
         {
             Debug.Log("Spell Combinations Maxed");
@@ -109,14 +107,10 @@ public class SpellCombinationScript : MonoBehaviour {
     {
         if (spellsSelected < 3)
         {
-
-
             int el2 = 2;
             spellCombinations.Add(el2);
             spellsSelected++;
         }
-
-
         else
         {
             Debug.Log("Spell Combinations Maxed");
@@ -125,14 +119,11 @@ public class SpellCombinationScript : MonoBehaviour {
     
     if (Input.GetKeyDown(KeyCode.Alpha3))
     {
-
         if (spellsSelected < 3)
-        {
-            
+        {  
                 int el3 = 3;
                 spellCombinations.Add(el3);
                 spellsSelected++;
-            
         }
         else
         {
@@ -140,14 +131,12 @@ public class SpellCombinationScript : MonoBehaviour {
         }
     }
 
-        if(Input.GetMouseButtonDown(0))
+    if(Input.GetMouseButtonDown(0))
+    {
+        if(spellsSelected==3)
         {
-            if(spellsSelected==3)
-            {
-              
-
-                Debug.Log("Spell Cast" + spellCombinations[0].ToString() + spellCombinations[1].ToString() + spellCombinations[2].ToString());
-            /*    paralysis();
+              Debug.Log("Spell Cast" + spellCombinations[0].ToString() + spellCombinations[1].ToString() + spellCombinations[2].ToString());
+                /*    paralysis();
                 blindness();
                 hearts();
                 light();
@@ -187,7 +176,6 @@ public class SpellCombinationScript : MonoBehaviour {
         else if (blindTimer <= 0)
         {
             isBlinded = false;
-            isBlinded = false;
             cam.cullingMask = (1);
             blindTimer = 4;
         }
@@ -210,14 +198,43 @@ public class SpellCombinationScript : MonoBehaviour {
         }
         else if (lightTimer <= 0)
         {
-
             isAlight = false;
             selfLight.SetActive(false);
             lightTimer = 10;
         }
 
+        //Flashed Spell Update
+        if(flashBool == true && BandF.bloomIntensity == 0 )
+        {
+            flash1stEffect.SetActive(true);
+            BandF.bloomIntensity = 100;
+        }
+        if (flashBool == true && BandF.bloomIntensity == 100)
+        {
+            flashBool = false;
+        }
+
+        if(flash1stEffect.active == true)
+        {
+            flash1stEffectTimer -= Time.deltaTime;
+        }
+        if(flash1stEffectTimer <= 0)
+        {
+            flash1stEffect.SetActive(false);
+            flash1stEffectTimer = 1;
+        }
+
+        if(BandF.bloomIntensity > 0)
+        {
+            BandF.bloomIntensity -= 1;
+        }
+        if(BandF.bloomIntensity < 0)
+        {
+            BandF.bloomIntensity = 0;
+        }
 			
 	}
+
 
 	bool paralysis ()
 	{
@@ -236,6 +253,7 @@ public class SpellCombinationScript : MonoBehaviour {
         }
 	}
 
+    //blindness is depend on the sky color
     bool blindness()
     {
 
@@ -296,12 +314,11 @@ else
 
 	}
 
-
+    //Flashed Spell
 	bool Flashed()
 	{
         if (spellCombinations[0] == 3 && spellCombinations[1] == 1 && spellCombinations[2] == 2) 
 		{
-           
             flashBool = true;
 			Debug.Log ("FLASH !");
             return true;
@@ -364,12 +381,7 @@ else
 				smoke.SetActive(true);
 				Debug.Log ("Puff");
 
-
 			}
-
-
-
-
 		}
 		
 	void drunkMathew()
