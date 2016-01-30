@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.UI;
 
 public class SpellCombinationScript : MonoBehaviour {
 
@@ -28,6 +29,9 @@ public class SpellCombinationScript : MonoBehaviour {
     private bool heartActive = false;
 	public bool isBlinded = false;
 
+	public GameObject flash;
+
+
 
 
 
@@ -43,13 +47,15 @@ public class SpellCombinationScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         HeartParticles.SetActive(false);
+
+		flash.SetActive (false);
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-
+		Flashed ();
 		//paralysis ();
 	
 
@@ -230,6 +236,15 @@ public class SpellCombinationScript : MonoBehaviour {
            
 		
 
+		}
+	}
+
+	void Flashed()
+	{
+		if (Input.GetKeyDown (KeyCode.F)) 
+		{
+			flash.SetActive (true);
+			Debug.Log ("FLASH !");
 		}
 	}
 }
