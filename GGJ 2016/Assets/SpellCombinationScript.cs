@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -31,8 +31,8 @@ public class SpellCombinationScript : MonoBehaviour {
 
     private bool heartActive = false;
 	public bool isBlinded = false;
-
-	public GameObject flash;
+    private bool flashBool = false;
+	public CanvasGroup flash;
 
 
 
@@ -52,7 +52,6 @@ public class SpellCombinationScript : MonoBehaviour {
         HeartParticles.SetActive(false);
 
 
-		flash.SetActive (false);
 
         selfLight.SetActive(false);
 
@@ -62,7 +61,7 @@ public class SpellCombinationScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		Flashed ();
+		
 		//paralysis ();
 	
 
@@ -144,6 +143,7 @@ public class SpellCombinationScript : MonoBehaviour {
                 blindness();
                 hearts();
                 light();
+                Flashed();
                 spellCombinations.Clear();
                 spellsSelected = 0;
             }
@@ -196,6 +196,16 @@ public class SpellCombinationScript : MonoBehaviour {
             isAlight = false;
             selfLight.SetActive(false);
             lightTimer = 10;
+        }
+        if(flashBool ==true)
+        {
+            flash.alpha -= Time.deltaTime;
+            if(flash.GetComponent<CanvasGroup>().alpha <= 0)
+            {
+                flash.alpha = 0;
+                flashBool = false;
+               
+            }
         }
 			
 	}
@@ -262,9 +272,10 @@ public class SpellCombinationScript : MonoBehaviour {
 
 	void Flashed()
 	{
-		if (Input.GetKeyDown (KeyCode.F)) 
+        if (spellCombinations[0] == 3 && spellCombinations[1] == 1 && spellCombinations[2] == 2) 
 		{
-			flash.SetActive (true);
+            flash.alpha = 255;
+            flashBool = true;
 			Debug.Log ("FLASH !");
 		}
 	}
