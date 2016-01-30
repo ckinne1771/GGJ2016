@@ -356,8 +356,7 @@ else
 
 	void smokebomb()
 	{
-		if (spellCombinations[0] == 2 && spellCombinations[1] == 1 && spellCombinations[2] == 3) 
-		{
+		
 			smokeActive = !smokeActive;
 
 			if (smokeActive) {
@@ -366,13 +365,13 @@ else
 				Debug.Log ("Puff");
 
 
-			} 
+			}
 
 
 
 
 		}
 		
-	}
+	
 
 }
