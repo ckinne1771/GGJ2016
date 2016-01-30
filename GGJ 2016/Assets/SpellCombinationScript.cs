@@ -16,8 +16,8 @@ public class SpellCombinationScript : MonoBehaviour {
     int spellsSelected = 0;
 
 	public GameObject player;
-	public bool isFrozen = false;
-
+    public float freezeTimer = 3.0f;
+    private bool isFrozen = false;
 
 
 	//private movement FirstPersonController;
@@ -33,7 +33,7 @@ public class SpellCombinationScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		paralysis ();
+		
 
 	if(Input.GetKeyDown(KeyCode.Alpha1))
     {
@@ -99,7 +99,7 @@ public class SpellCombinationScript : MonoBehaviour {
         }
     }
 
-        if(Input.GetKey(KeyCode.Mouse0))
+        if(Input.GetMouseButtonDown(0))
         {
             if(element1Active == true && element2Active == true && element3Active == true)
             {
@@ -108,31 +108,33 @@ public class SpellCombinationScript : MonoBehaviour {
                 element3Active = false;
 
                 Debug.Log("Spell Cast" + spellCombinations[0].ToString() + spellCombinations[1].ToString() + spellCombinations[2].ToString());
+                paralysis();
                 spellCombinations.Clear();
                 spellsSelected = 0;
             }
+        }
+
+        if(isFrozen == true && freezeTimer >0)
+        {
+            freezeTimer-= Time.deltaTime;
+            Debug.Log(freezeTimer.ToString());
+        }
+        else if( freezeTimer <= 0)
+        {
+            isFrozen = false;
+            player.GetComponent<FirstPersonController>().enabled = true;
+            freezeTimer = 3;
         }
 			
 	}
 
 	void paralysis ()
 	{
-		if (Input.GetButtonDown ("Freeze")) 
+		if (spellCombinations[0] == 2 && spellCombinations[1] == 1 && spellCombinations[2] == 3) 
 		{
-			isFrozen = !isFrozen;
-
-			if (isFrozen) {
-				
-					isFrozen = true;
 					Debug.Log ("Your Frozen Bitch");
 					player.GetComponent<FirstPersonController> ().enabled = false;
-
-			} else 
-			{
-				isFrozen = false;
-				player.GetComponent<FirstPersonController> ().enabled = true;
-
-			}
+                    isFrozen = true;
 
 
 		}
