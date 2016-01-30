@@ -31,9 +31,16 @@ public class SpellCombinationScript : MonoBehaviour {
 
     private bool heartActive = false;
 	public bool isBlinded = false;
+
     private bool flashBool = false;
 	public CanvasGroup flash;
 
+
+	public GameObject flash;
+	public GameObject scream;
+
+
+	public AudioClip screaming;
 
 
 
@@ -61,7 +68,12 @@ public class SpellCombinationScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
 		
+
+		Flashed ();
+		Screaming ();
+
 		//paralysis ();
 	
 
@@ -301,5 +313,14 @@ public class SpellCombinationScript : MonoBehaviour {
 
             }
         }
+
+	void Screaming()
+	{
+		if (Input.GetKeyDown (KeyCode.Q))
+		{
+			GetComponent<AudioSource> ().PlayOneShot (screaming);
+			Debug.Log ("AAAAAAAGGGGGGHHHHHHHHHHHH!!!!!!!!!!");
+		}
+	}
 
 }
