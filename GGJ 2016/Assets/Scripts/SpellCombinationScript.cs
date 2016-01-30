@@ -19,7 +19,7 @@ public class SpellCombinationScript : MonoBehaviour {
 	public GameObject player;
 
     public float freezeTimer = 3.0f;
-    public float blindTimer = 4.0f;
+    public float blindTimer = 2.0f;
     public float heartTimer = 5.0f;
     private bool isFrozen = false;
     private bool isAlight = false;
