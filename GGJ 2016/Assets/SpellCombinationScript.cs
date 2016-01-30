@@ -99,7 +99,7 @@ public class SpellCombinationScript : MonoBehaviour {
         }
     }
 
-        if(Input.GetKey(KeyCode.Space))
+        if(Input.GetKey(KeyCode.Mouse0))
         {
             if(element1Active == true && element2Active == true && element3Active == true)
             {
