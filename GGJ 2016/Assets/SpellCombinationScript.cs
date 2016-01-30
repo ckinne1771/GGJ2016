@@ -33,7 +33,9 @@ public class SpellCombinationScript : MonoBehaviour {
 	public bool isBlinded = false;
 
 	public GameObject flash;
+	public GameObject scream;
 
+	public AudioClip screaming;
 
 
 
@@ -63,6 +65,7 @@ public class SpellCombinationScript : MonoBehaviour {
 	void Update () {
 
 		Flashed ();
+		Screaming ();
 		//paralysis ();
 	
 
@@ -290,5 +293,14 @@ public class SpellCombinationScript : MonoBehaviour {
 
             }
         }
+
+	void Screaming()
+	{
+		if (Input.GetKeyDown (KeyCode.Q))
+		{
+			GetComponent<AudioSource> ().PlayOneShot (screaming);
+			Debug.Log ("AAAAAAAGGGGGGHHHHHHHHHHHH!!!!!!!!!!");
+		}
+	}
 
 }
