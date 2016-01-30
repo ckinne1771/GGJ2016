@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityStandardAssets.ImageEffects;
 using UnityEngine.UI;
 
 public class SpellCombinationScript : MonoBehaviour {
@@ -42,21 +43,19 @@ public class SpellCombinationScript : MonoBehaviour {
 	public GameObject smoke;
 	private bool smokeActive = false;
 
-
-
 	public AudioClip screaming;
 
+    //drunkMathew var.
+    public float drunkTimer;
+    public GameObject fpCamera;
 
-
+    //QuakeState var.
+    public float shake = 0;
+    public float shakeAmount = 0.7f;
+    public float decreaseFactor = 1;
 
 	//public camera Camera;
-
-
-
-
 	//private movement FirstPersonController;
-
-
 
 	// Use this for initialization
 	void Start () {
@@ -68,6 +67,9 @@ public class SpellCombinationScript : MonoBehaviour {
 
         selfLight.SetActive(false);
 
+        //drunkMathew setup
+        drunkTimer = 3;
+        fpCamera.GetComponent<MotionBlur>().enabled = false;
 		
 	}
 	
@@ -79,7 +81,8 @@ public class SpellCombinationScript : MonoBehaviour {
 
 		//Flashed ();
 		Screaming ();
-
+        drunkMathew();
+        quakeState();
 		//paralysis ();
 	
 
@@ -266,7 +269,7 @@ public class SpellCombinationScript : MonoBehaviour {
         }
     
 
-        bool hearts ()
+    bool hearts ()
 	{
 
         if (spellCombinations[0] == 2 && spellCombinations[1] == 3 && spellCombinations[2] == 1) 
@@ -284,9 +287,6 @@ public class SpellCombinationScript : MonoBehaviour {
             {
                 return false;
             }
-
-           
-		
 
 		}
 else
@@ -372,6 +372,43 @@ else
 
 		}
 		
-	
+	void drunkMathew()
+    {
+        //if (spellCombinations[0] == 1 && spellCombinations[1] == 2 && spellCombinations[2] == 3)
+        //testing code
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+             fpCamera.GetComponent<MotionBlur>().enabled = true;
+        }
+
+        if (fpCamera.GetComponent<MotionBlur>().enabled == true)
+        {
+            drunkTimer -= Time.deltaTime;
+        }
+
+        if (drunkTimer <= 0)
+        {
+             fpCamera.GetComponent<MotionBlur>().enabled = false;
+             drunkTimer = 3;
+        }
+    }
+
+    void quakeState()
+    {
+        //if (spellCombinations[0] == 1 && spellCombinations[1] == 2 && spellCombinations[2] == 3)
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            shake = 1;
+        }
+        if (shake > 0)
+        {
+            fpCamera.transform.localPosition = Random.insideUnitSphere * shakeAmount;
+            shake -= Time.deltaTime * decreaseFactor;
+        }
+        else
+        {
+            shake = 0;
+        }
+    }
 
 }
