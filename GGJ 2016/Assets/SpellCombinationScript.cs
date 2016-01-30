@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -18,6 +18,7 @@ public class SpellCombinationScript : MonoBehaviour {
 	public GameObject player;
 
     public float freezeTimer = 3.0f;
+    public float blindTimer = 4.0f;
     private bool isFrozen = false;
 
 
@@ -47,7 +48,7 @@ public class SpellCombinationScript : MonoBehaviour {
 
 
 		//paralysis ();
-		blindness ();
+	
 
 
 	if(Input.GetKeyDown(KeyCode.Alpha1))
@@ -124,6 +125,7 @@ public class SpellCombinationScript : MonoBehaviour {
 
                 Debug.Log("Spell Cast" + spellCombinations[0].ToString() + spellCombinations[1].ToString() + spellCombinations[2].ToString());
                 paralysis();
+                blindness();
                 spellCombinations.Clear();
                 spellsSelected = 0;
             }
@@ -139,6 +141,19 @@ public class SpellCombinationScript : MonoBehaviour {
             isFrozen = false;
             player.GetComponent<FirstPersonController>().enabled = true;
             freezeTimer = 3;
+        }
+
+        if (isBlinded == true && blindTimer > 0)
+        {
+            blindTimer -= Time.deltaTime;
+            Debug.Log(blindTimer.ToString());
+        }
+        else if (blindTimer <= 0)
+        {
+            isBlinded = false;
+            isBlinded = false;
+            cam.cullingMask = (1);
+            blindTimer = 3;
         }
 			
 	}
@@ -159,7 +174,7 @@ public class SpellCombinationScript : MonoBehaviour {
 	void blindness ()
 	{
 
-		if (Input.GetKeyDown("r")) 
+        if (spellCombinations[0] == 3 && spellCombinations[1] == 2 && spellCombinations[2] == 1) 
 		{
 			isBlinded = !isBlinded;
 
@@ -175,17 +190,7 @@ public class SpellCombinationScript : MonoBehaviour {
 
 
 			} 
-			else 
-			{
-				isBlinded = false;
-				cam.cullingMask = (1);
-				//cam = GetComponent<Camera>().cullingMask = "Everything";
-				//cam = GetComponent<Camera>().enabled = true;
-
-
-
-			}
-
+		
 
 		}
 	}
