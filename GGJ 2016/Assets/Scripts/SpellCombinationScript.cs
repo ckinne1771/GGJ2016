@@ -5,49 +5,59 @@ using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.ImageEffects;
 using UnityEngine.UI;
 
-public class SpellCombinationScript : MonoBehaviour {
-
-    List<int> spellCombinations = new List<int>();
-    bool element1Active = false;
-   
-    bool element2Active = false;
-   
-    bool element3Active = false;
-  
-    bool maxSelection = false;
-    int spellsSelected = 0;
-
-	public GameObject player;
-
-    public float freezeTimer = 3.0f;
-    public float blindTimer = 2.0f;
-    public float heartTimer = 5.0f;
-    private bool isFrozen = false;
-    private bool isAlight = false;
-    public float lightTimer = 10.0f;
-
-    public GameObject HeartParticles;
-    public GameObject selfLight;
-	public Camera cam;
-
-    private bool heartActive = false;
-	public bool isBlinded = false;
-
-    private bool flashBool = false;
-
-	public GameObject scream;
-
-	public GameObject smoke;
-	private bool smokeActive = false;
-
-	public AudioClip screaming;
+public class SpellCombinationScript : MonoBehaviour
+{
 
     public GameObject fpCamera;
+
+    List<int> spellCombinations = new List<int>();
+
+    bool element1Active = false;
+    bool element2Active = false;
+    bool element3Active = false;
+
+    bool maxSelection = false;
+
+    int spellsSelected = 0;
+
+    public GameObject player;
+
+    public float freezeTimer = 3.0f;
+    private bool isFrozen = false;
+    private bool isAlight = false;
+
+    public PauseScript pauseGame;
+
+    //Heart Spell
+    public GameObject HeartParticles;
+    public float heartTimer = 5.0f;
+    private bool heartActive = false;
+
+    //Light Spell
+    public float lightTimer = 10.0f;
+    public GameObject selfLight;
+
+    //Blind Spell
+    public float blindTimer = 2.0f;
+    public bool isBlinded = false;
+
+    //Scream Spell
+    public GameObject scream;
+    public AudioClip screaming;
+    //Scream Spell + 
+    private bool screamDamage;
+    private Collider coll;
+
+    //Smoke Spell
+    public GameObject smoke;
+    //private bool smokeActive = false;
+    public float pooTimer = 2;
 
     //Flashed Spell Update
     public BloomAndFlares BandF;
     public GameObject flash1stEffect;
     public float flash1stEffectTimer;
+    private bool flashBool = false;
 
     //drunkMathew var.
     public float drunkTimer;
@@ -57,117 +67,124 @@ public class SpellCombinationScript : MonoBehaviour {
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 1;
 
-	//public camera Camera;
-	//private movement FirstPersonController;
+    //Psy Spell
+    public bool isPsy;
+    public float psyLimit;
 
-	// Use this for initialization
-	void Start () {
+    //Spell Compelete
+    private int castingLV;
+
+    // Use this for initialization
+    void Start()
+    {
+
+        //Heart Spell
         HeartParticles.SetActive(false);
-		smoke.SetActive(false);
 
+        //Smoke Spell
+        //smoke.SetActive(false);
+
+        //Light Spell
         selfLight.SetActive(false);
-        
-        //flashed Effect 1 setup
+
+        //flash spell Effect 1 setup
         flash1stEffect.SetActive(false);
         flash1stEffectTimer = 1;
-        //flashed Effect 2 setup
+        //flash spell Effect 2 setup
         BandF = fpCamera.GetComponent<BloomAndFlares>();
         BandF.bloomIntensity = 0;
 
         //drunkMathew setup
         drunkTimer = 3;
         fpCamera.GetComponent<MotionBlur>().enabled = false;
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
 
-	//Flashed ();
-	Screaming ();
-    drunkMathew();
-    quakeState();
-    //paralysis ();
+        //Psy Spell
+        psyLimit = 5;
 
-    if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-        if (spellsSelected < 3)
-        {
-            int el1 = 1;
-            spellCombinations.Add(el1);
-            spellsSelected++;
-        }
-        else
-        {
-            Debug.Log("Spell Combinations Maxed");
-        }
     }
 
-    if (Input.GetKeyDown(KeyCode.Alpha2))
+    // Update is called once per frame
+    void Update()
     {
-        if (spellsSelected < 3)
+        if (pauseGame.showButton == false)
         {
-            int el2 = 2;
-            spellCombinations.Add(el2);
-            spellsSelected++;
-        }
-        else
-        {
-            Debug.Log("Spell Combinations Maxed");
-        }
-    }
-    
-    if (Input.GetKeyDown(KeyCode.Alpha3))
-    {
-        if (spellsSelected < 3)
-        {  
-                int el3 = 3;
-                spellCombinations.Add(el3);
-                spellsSelected++;
-        }
-        else
-        {
-            Debug.Log("Spell Combinations Maxed");
-        }
-    }
+            //Making Spell
 
-    if(Input.GetMouseButtonDown(0))
-    {
-        if(spellsSelected==3)
-        {
-              Debug.Log("Spell Cast" + spellCombinations[0].ToString() + spellCombinations[1].ToString() + spellCombinations[2].ToString());
-                /*    paralysis();
-                blindness();
-                hearts();
-                light();
-                Flashed();*/
-
-                if (paralysis() == false && blindness() == false && hearts() == false && light() == false && Flashed() == false)
-                {
-                    smokebomb();
-                }
-                
-                spellCombinations.Clear();
-                spellsSelected = 0;
-            }
-            else
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                Debug.Log("Not enough spells selected");
+                if (spellsSelected < 3)
+                {
+                    int el1 = 1;
+                    spellCombinations.Add(el1);
+                    spellsSelected++;
+                }
+                else
+                {
+                    Debug.Log("Spell Combinations Maxed");
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                if (spellsSelected < 3)
+                {
+                    int el2 = 2;
+                    spellCombinations.Add(el2);
+                    spellsSelected++;
+                }
+                else
+                {
+                    Debug.Log("Spell Combinations Maxed");
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                if (spellsSelected < 3)
+                {
+                    int el3 = 3;
+                    spellCombinations.Add(el3);
+                    spellsSelected++;
+                }
+                else
+                {
+                    Debug.Log("Spell Combinations Maxed");
+                }
+            }
+
+            //Fire Spell
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (spellsSelected == 3)
+                {
+                    //Debug.Log("Spell Cast" + spellCombinations[0].ToString() + spellCombinations[1].ToString() + spellCombinations[2].ToString());
+                    castASpell();
+
+                    spellCombinations.Clear();
+                    spellsSelected = 0;
+                }
+                else
+                {
+                    Debug.Log("Not enough spells selected");
+                }
             }
         }
 
-        if(isFrozen == true && freezeTimer >0)
+
+        //Paralyse Spell Eff.
+        if (isFrozen == true && freezeTimer > 0)
         {
-            freezeTimer-= Time.deltaTime;
+            freezeTimer -= Time.deltaTime;
             Debug.Log(freezeTimer.ToString());
         }
-        else if( freezeTimer <= 0)
+        else if (freezeTimer <= 0)
         {
             isFrozen = false;
             player.GetComponent<FirstPersonController>().enabled = true;
             freezeTimer = 3;
         }
 
+        //Blind Spell Eff.
         if (isBlinded == true && blindTimer > 0)
         {
             blindTimer -= Time.deltaTime;
@@ -176,9 +193,11 @@ public class SpellCombinationScript : MonoBehaviour {
         else if (blindTimer <= 0)
         {
             isBlinded = false;
-            cam.cullingMask = (1);
+            fpCamera.GetComponent<Camera>().cullingMask = (1);
             blindTimer = 4;
         }
+
+        //Heart Spell Eff.
         if (heartActive == true && heartTimer > 0)
         {
             heartTimer -= Time.deltaTime;
@@ -186,15 +205,15 @@ public class SpellCombinationScript : MonoBehaviour {
         }
         else if (heartTimer <= 0)
         {
-            
             heartActive = false;
             HeartParticles.SetActive(false);
             heartTimer = 5;
         }
+
+        //Light Spell Eff.
         if (isAlight == true && lightTimer > 0)
         {
-           lightTimer -= Time.deltaTime;
-           // Debug.Log(blindTimer.ToString());
+            lightTimer -= Time.deltaTime;
         }
         else if (lightTimer <= 0)
         {
@@ -203,8 +222,8 @@ public class SpellCombinationScript : MonoBehaviour {
             lightTimer = 10;
         }
 
-        //Flashed Spell Update
-        if(flashBool == true && BandF.bloomIntensity == 0 )
+        //Flashed Spell Eff. 
+        if (flashBool == true && BandF.bloomIntensity == 0)
         {
             flash1stEffect.SetActive(true);
             BandF.bloomIntensity = 100;
@@ -214,204 +233,38 @@ public class SpellCombinationScript : MonoBehaviour {
             flashBool = false;
         }
 
-        if(flash1stEffect.active == true)
+        if (flash1stEffect.active == true)
         {
             flash1stEffectTimer -= Time.deltaTime;
         }
-        if(flash1stEffectTimer <= 0)
+        if (flash1stEffectTimer <= 0)
         {
             flash1stEffect.SetActive(false);
             flash1stEffectTimer = 1;
         }
 
-        if(BandF.bloomIntensity > 0)
+        if (BandF.bloomIntensity > 0)
         {
             BandF.bloomIntensity -= 1;
         }
-        if(BandF.bloomIntensity < 0)
+        if (BandF.bloomIntensity < 0)
         {
             BandF.bloomIntensity = 0;
         }
-			
-	}
 
-
-	bool paralysis ()
-	{
-		if (spellCombinations[0] == 2 && spellCombinations[1] == 1 && spellCombinations[2] == 3) 
-		{
-					Debug.Log ("Your Frozen Bitch");
-
-					player.GetComponent<FirstPersonController> ().enabled = false;
-                    isFrozen = true;
-                    return true;
-
-		}
-        else
+        if (fpCamera.GetComponent<ColorCorrectionCurves>().enabled == true)
         {
-            return false;
+            psyLimit -= Time.deltaTime;
         }
-	}
 
-    //blindness is depend on the sky color
-    bool blindness()
-    {
-
-        if (spellCombinations[0] == 3 && spellCombinations[1] == 2 && spellCombinations[2] == 1)
+        //psy Spell Eff.
+        if (psyLimit <= 0)
         {
-            isBlinded = !isBlinded;
-
-            if (isBlinded)
-            {
-
-                isBlinded = true;
-                Debug.Log("IM BLIND, BBBLLLLIIIIINNNDDDDD !!!!!!!");
-
-                //camera = GetComponentsInChildren<Camera>();
-                //cam = GetComponent<Camera>().cullingMask = 0;
-                //cam = GetComponent<Camera>().enabled = false;
-                cam.cullingMask = (0);
-                return true;
-
-            }
-            else
-            {
-                return false;
-            }
-        }
-            else
-            {
-                return false;
-            }
-
-        }
-    
-
-    bool hearts ()
-	{
-
-        if (spellCombinations[0] == 2 && spellCombinations[1] == 3 && spellCombinations[2] == 1) 
-		{
-			heartActive = !heartActive;
-
-			if (heartActive) {
-
-                HeartParticles.SetActive(true);
-				Debug.Log ("GLORIOUS HEARTS!!!!");
-                return true;
-
-			}
-            else
-            {
-                return false;
-            }
-
-		}
-else
-        {
-            return false;
+            fpCamera.GetComponent<ColorCorrectionCurves>().enabled = false;
+            psyLimit = 5;
         }
 
-	}
-
-    //Flashed Spell
-	bool Flashed()
-	{
-        if (spellCombinations[0] == 3 && spellCombinations[1] == 1 && spellCombinations[2] == 2) 
-		{
-            flashBool = true;
-			Debug.Log ("FLASH !");
-            return true;
-		}
-        else
-        {
-            return false;
-        }
-	}
-
-    bool light()
-        {
-
-            if (spellCombinations[0] == 1 && spellCombinations[1] == 2 && spellCombinations[2] == 3)
-            {
-                isAlight = !isAlight;
-
-                if (isAlight)
-                {
-
-                    selfLight.SetActive(true);
-                    Debug.Log("ILLUMINATION!!!!");
-                    return true;
-
-                }
-                else
-                {
-                    return false;
-                }
-
-
-            }
-else
-            {
-                return false;
-            }
-        }
-
-	bool Screaming()
-	{
-		if (Input.GetKeyDown (KeyCode.Q))
-		{
-			GetComponent<AudioSource> ().PlayOneShot (screaming);
-			Debug.Log ("AAAAAAAGGGGGGHHHHHHHHHHHH!!!!!!!!!!");
-            return true;
-		}
-        else
-        {
-            return false;
-        }
-	}
-
-	void smokebomb()
-	{
-		
-			smokeActive = !smokeActive;
-
-			if (smokeActive) {
-
-				smoke.SetActive(true);
-				Debug.Log ("Puff");
-
-			}
-		}
-		
-	void drunkMathew()
-    {
-        //if (spellCombinations[0] == 1 && spellCombinations[1] == 2 && spellCombinations[2] == 3)
-        //testing code
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-             fpCamera.GetComponent<MotionBlur>().enabled = true;
-        }
-
-        if (fpCamera.GetComponent<MotionBlur>().enabled == true)
-        {
-            drunkTimer -= Time.deltaTime;
-        }
-
-        if (drunkTimer <= 0)
-        {
-             fpCamera.GetComponent<MotionBlur>().enabled = false;
-             drunkTimer = 3;
-        }
-    }
-
-    void quakeState()
-    {
-        //if (spellCombinations[0] == 1 && spellCombinations[1] == 2 && spellCombinations[2] == 3)
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            shake = 1;
-        }
+        //shake Spell Eff.
         if (shake > 0)
         {
             fpCamera.transform.localPosition = Random.insideUnitSphere * shakeAmount;
@@ -421,6 +274,198 @@ else
         {
             shake = 0;
         }
+
+        //drunkMathew Spell Eff.
+        if (fpCamera.GetComponent<MotionBlur>().enabled == true)
+        {
+            drunkTimer -= Time.deltaTime;
+        }
+
+        if (drunkTimer <= 0)
+        {
+            fpCamera.GetComponent<MotionBlur>().enabled = false;
+            drunkTimer = 3;
+        }
+
+        //smoke Spell Eff.
+        if (smoke.active == true) {
+            pooTimer -= Time.deltaTime;
+        }
+
+        if (pooTimer <= 0)
+        {
+            smoke.SetActive(false);
+            pooTimer = 2;
+        }
+
+        //Screaming Spell Eff.+
+        if (screamDamage == true && Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit = new RaycastHit();
+            screamDamage = false;
+            if (Physics.Raycast(ray,out hit))
+            {
+                if(hit.collider.gameObject.layer == 8)
+                {
+                    Destroy(hit.collider.gameObject);
+                }
+            }
+        }
+
+        //casting spell
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            castingLV = 1;
+        }
+        if (castingLV == 1 && Input.GetKeyDown(KeyCode.H))
+        {
+            castingLV = 2;
+        }
+        if (castingLV == 2 && Input.GetKeyDown(KeyCode.R))
+        {
+            castingLV = 3;
+        }
+        if (castingLV == 3 && Input.GetKeyDown(KeyCode.I))
+        {
+            castingLV = 4;
+        }
+        if (castingLV == 4 && Input.GetKeyDown(KeyCode.S))
+        {
+            castingLV = 5;
+        }
+
+        if (castingLV == 5)
+        {
+            Debug.Log("Unlimited Power!!!");
+            otherSpell();
+            if(castingLV == 5 && Input.GetKeyDown(KeyCode.Escape))
+            { castingLV = 6; }
+        }
+
+    }
+
+
+
+    //SpellBook List
+    void castASpell()
+    {
+
+        //Paralysis Spell
+        if (spellCombinations[0] == 2 && spellCombinations[1] == 3 && spellCombinations[2] == 1) {
+            paralysis();
+        } else if (spellCombinations[0] == 3 && spellCombinations[1] == 3 && spellCombinations[2] == 2) {
+            blindness();
+        } else if (spellCombinations[0] == 1 && spellCombinations[1] == 1 && spellCombinations[2] == 1) {
+            hearts();
+        } else if (spellCombinations[0] == 1 && spellCombinations[1] == 1 && spellCombinations[2] == 3) {
+            Flashed();
+        } else if (spellCombinations[0] == 3 && spellCombinations[1] == 2 && spellCombinations[2] == 3) {
+            light();
+        } else if (spellCombinations[0] == 2 && spellCombinations[1] == 1 && spellCombinations[2] == 3) {
+            Screaming(); //Check
+        } else if (spellCombinations[0] == 3 && spellCombinations[1] == 1 && spellCombinations[2] == 1) {
+            drunkMathew(); //Check
+        } else if (spellCombinations[0] == 1 && spellCombinations[1] == 3 && spellCombinations[2] == 2) {
+            quakeState(); //Check
+        } else if (spellCombinations[0] == 1 && spellCombinations[1] == 2 && spellCombinations[2] == 2) {
+            psySpell();
+        }
+        else
+        {
+            smokebomb();
+        }
+    }
+
+    //Paralysis Spell
+    void paralysis()
+    {
+        Debug.Log("Your Frozen Bitch");
+        player.GetComponent<FirstPersonController>().enabled = false;
+        isFrozen = true;
+    }
+
+    //Blind Spell - blindness is depend on the sky color
+    void blindness()
+    {
+        isBlinded = !isBlinded;
+        if (isBlinded)
+        {
+            isBlinded = true;
+            Debug.Log("IM BLIND, BBBLLLLIIIIINNNDDDDD !!!!!!!");
+            fpCamera.GetComponent<Camera>().cullingMask = (0);
+        }
+    }
+
+    //Heart Spell
+    void hearts()
+    {
+        heartActive = !heartActive;
+        if (heartActive)
+        {
+            HeartParticles.SetActive(true);
+            Debug.Log("GLORIOUS HEARTS!!!!");
+        }
+    }
+
+    //Flashed Spell
+    void Flashed()
+    {
+        flashBool = true;
+        Debug.Log("FLASH !");
+    }
+
+    //Light Spell
+    void light()
+    {
+        isAlight = !isAlight;
+        if (isAlight)
+        {
+            selfLight.SetActive(true);
+            Debug.Log("ILLUMINATION!!!!");
+        }
+    }
+
+    //Scream Spell
+    void Screaming()
+    {
+        screamDamage = true;
+        GetComponent<AudioSource>().PlayOneShot(screaming);
+        Debug.Log("AAAAAAAGGGGGGHHHHHHHHHHHH!!!!!!!!!!");
+    }
+
+    //smoke Spell
+    void smokebomb()
+    {
+        smoke.SetActive(true);
+    }
+
+    //drunk Spell
+    void drunkMathew()
+    {
+        fpCamera.GetComponent<MotionBlur>().enabled = true;
+
+    }
+
+    //Quake Spell
+    void quakeState()
+    {
+        shake = 1;
+    }
+
+    //Psy Spell
+    void psySpell()
+    {
+        fpCamera.GetComponent<ColorCorrectionCurves>().enabled = true;
+    }
+
+    //other Spell?
+    void otherSpell()
+    {
+        Screaming();
+        drunkMathew();
+        quakeState();
+        psySpell();
     }
 
 }
