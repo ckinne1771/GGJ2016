@@ -8,7 +8,7 @@ public class PauseScript : MonoBehaviour {
 
     public GameObject buttonLayout;
     public GameObject playersControl;
-    private bool showButton = false;
+    public bool showButton = false;
 
     // Use this for initialization
     void Start()

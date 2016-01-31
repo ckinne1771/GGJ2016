@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scene/bookScene.unity
-  - enabled: 0
-    path: Assets/Scene/startScene.unity
   - enabled: 1
+    path: Assets/Scene/mainGameScene.unity
+  - enabled: 1
+    path: Assets/Scene/boookScene.unity
+  - enabled: 0
     path: Assets/Scene/ChrisGameSceneLevel.unity
