@@ -1,0 +1,384 @@
+fileFormatVersion: 2
+guid: 80713dd9a7a6a4f62bf52a263b6d5acd
+timeCreated: 1454240074
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Bed
+    100002: bed
+    100004: Bedroom
+    100006: Bedroom-RedGoldWall
+    100008: Candleabra
+    100010: Candleabra001
+    100012: Candleabra001_MeshPart0
+    100014: Candleabra001_MeshPart1
+    100016: Candleabra_MeshPart0
+    100018: Candleabra_MeshPart1
+    100020: Casting Room
+    100022: Chand.
+    100024: Chand.001
+    100026: Chandelier
+    100028: Chandelier001
+    100030: Chandelier001_MeshPart0
+    100032: Chandelier001_MeshPart1
+    100034: Chandelier001_MeshPart2
+    100036: Chandelier001_MeshPart3
+    100038: Chandelier_arms
+    100040: Chandelier_arms001
+    100042: Chandelier_Chain
+    100044: Chandelier_Chain001
+    100046: Chandelier_MeshPart0
+    100048: Chandelier_MeshPart1
+    100050: Chandelier_MeshPart2
+    100052: Chandelier_MeshPart3
+    100054: Cone005
+    100056: Cone006
+    100058: crystal ceiling
+    100060: Curtain
+    100062: curtain
+    100064: Curtain001
+    100066: curtain001
+    100068: Curtain002
+    100070: curtain002
+    100072: Curtain003
+    100074: curtain003
+    100076: Curtain004
+    100078: curtain004
+    100080: Curtain005
+    100082: curtain005
+    100084: Cylinder009
+    100086: Cylinder010
+    100088: Cylinder011
+    100090: Cylinder012
+    100092: Cylinder013
+    100094: Cylinder014
+    100096: Cylinder015
+    100098: Cylinder016
+    100100: Cylinder017
+    100102: Cylinder018
+    100104: FIREPLACE
+    100106: fireplace
+    100108: Floor
+    100110: Hallway
+    100112: Library
+    100114: Object001
+    100116: pillow bottom
+    100118: pillow left
+    100120: pillow right
+    100122: pillow top
+    100124: Plane001
+    100126: Secret Room _B
+    100128: Secret Room_L
+    100130: tall  vase
+    100132: tall  vase001
+    100134: //RootNode
+    100136: Vase 009
+    100138: Vase 014
+    100140: Vase 015
+    100142: Vase 016
+    100144: Vase 017
+    400000: Bed
+    400002: bed
+    400004: Bedroom
+    400006: Bedroom-RedGoldWall
+    400008: Candleabra
+    400010: Candleabra001
+    400012: Candleabra001_MeshPart0
+    400014: Candleabra001_MeshPart1
+    400016: Candleabra_MeshPart0
+    400018: Candleabra_MeshPart1
+    400020: Casting Room
+    400022: Chand.
+    400024: Chand.001
+    400026: Chandelier
+    400028: Chandelier001
+    400030: Chandelier001_MeshPart0
+    400032: Chandelier001_MeshPart1
+    400034: Chandelier001_MeshPart2
+    400036: Chandelier001_MeshPart3
+    400038: Chandelier_arms
+    400040: Chandelier_arms001
+    400042: Chandelier_Chain
+    400044: Chandelier_Chain001
+    400046: Chandelier_MeshPart0
+    400048: Chandelier_MeshPart1
+    400050: Chandelier_MeshPart2
+    400052: Chandelier_MeshPart3
+    400054: Cone005
+    400056: Cone006
+    400058: crystal ceiling
+    400060: Curtain
+    400062: curtain
+    400064: Curtain001
+    400066: curtain001
+    400068: Curtain002
+    400070: curtain002
+    400072: Curtain003
+    400074: curtain003
+    400076: Curtain004
+    400078: curtain004
+    400080: Curtain005
+    400082: curtain005
+    400084: Cylinder009
+    400086: Cylinder010
+    400088: Cylinder011
+    400090: Cylinder012
+    400092: Cylinder013
+    400094: Cylinder014
+    400096: Cylinder015
+    400098: Cylinder016
+    400100: Cylinder017
+    400102: Cylinder018
+    400104: FIREPLACE
+    400106: fireplace
+    400108: Floor
+    400110: Hallway
+    400112: Library
+    400114: Object001
+    400116: pillow bottom
+    400118: pillow left
+    400120: pillow right
+    400122: pillow top
+    400124: Plane001
+    400126: Secret Room _B
+    400128: Secret Room_L
+    400130: tall  vase
+    400132: tall  vase001
+    400134: //RootNode
+    400136: Vase 009
+    400138: Vase 014
+    400140: Vase 015
+    400142: Vase 016
+    400144: Vase 017
+    2300000: bed
+    2300002: Bedroom
+    2300004: Bedroom-RedGoldWall
+    2300006: Candleabra001_MeshPart0
+    2300008: Candleabra001_MeshPart1
+    2300010: Candleabra_MeshPart0
+    2300012: Candleabra_MeshPart1
+    2300014: Casting Room
+    2300016: Chandelier001_MeshPart0
+    2300018: Chandelier001_MeshPart1
+    2300020: Chandelier001_MeshPart2
+    2300022: Chandelier001_MeshPart3
+    2300024: Chandelier_arms
+    2300026: Chandelier_arms001
+    2300028: Chandelier_Chain
+    2300030: Chandelier_Chain001
+    2300032: Chandelier_MeshPart0
+    2300034: Chandelier_MeshPart1
+    2300036: Chandelier_MeshPart2
+    2300038: Chandelier_MeshPart3
+    2300040: Cone005
+    2300042: Cone006
+    2300044: crystal ceiling
+    2300046: curtain
+    2300048: curtain001
+    2300050: curtain002
+    2300052: curtain003
+    2300054: curtain004
+    2300056: curtain005
+    2300058: Cylinder009
+    2300060: Cylinder010
+    2300062: Cylinder011
+    2300064: Cylinder012
+    2300066: Cylinder013
+    2300068: Cylinder014
+    2300070: Cylinder015
+    2300072: Cylinder016
+    2300074: Cylinder017
+    2300076: Cylinder018
+    2300078: FIREPLACE
+    2300080: Floor
+    2300082: Hallway
+    2300084: Library
+    2300086: Object001
+    2300088: pillow bottom
+    2300090: pillow left
+    2300092: pillow right
+    2300094: pillow top
+    2300096: Plane001
+    2300098: Secret Room _B
+    2300100: Secret Room_L
+    2300102: Vase 009
+    2300104: Vase 014
+    2300106: Vase 015
+    2300108: Vase 016
+    2300110: Vase 017
+    3300000: bed
+    3300002: Bedroom
+    3300004: Bedroom-RedGoldWall
+    3300006: Candleabra001_MeshPart0
+    3300008: Candleabra001_MeshPart1
+    3300010: Candleabra_MeshPart0
+    3300012: Candleabra_MeshPart1
+    3300014: Casting Room
+    3300016: Chandelier001_MeshPart0
+    3300018: Chandelier001_MeshPart1
+    3300020: Chandelier001_MeshPart2
+    3300022: Chandelier001_MeshPart3
+    3300024: Chandelier_arms
+    3300026: Chandelier_arms001
+    3300028: Chandelier_Chain
+    3300030: Chandelier_Chain001
+    3300032: Chandelier_MeshPart0
+    3300034: Chandelier_MeshPart1
+    3300036: Chandelier_MeshPart2
+    3300038: Chandelier_MeshPart3
+    3300040: Cone005
+    3300042: Cone006
+    3300044: crystal ceiling
+    3300046: curtain
+    3300048: curtain001
+    3300050: curtain002
+    3300052: curtain003
+    3300054: curtain004
+    3300056: curtain005
+    3300058: Cylinder009
+    3300060: Cylinder010
+    3300062: Cylinder011
+    3300064: Cylinder012
+    3300066: Cylinder013
+    3300068: Cylinder014
+    3300070: Cylinder015
+    3300072: Cylinder016
+    3300074: Cylinder017
+    3300076: Cylinder018
+    3300078: FIREPLACE
+    3300080: Floor
+    3300082: Hallway
+    3300084: Library
+    3300086: Object001
+    3300088: pillow bottom
+    3300090: pillow left
+    3300092: pillow right
+    3300094: pillow top
+    3300096: Plane001
+    3300098: Secret Room _B
+    3300100: Secret Room_L
+    3300102: Vase 009
+    3300104: Vase 014
+    3300106: Vase 015
+    3300108: Vase 016
+    3300110: Vase 017
+    4300000: Hallway
+    4300002: Casting Room
+    4300004: Library
+    4300006: Bedroom
+    4300008: Floor
+    4300010: crystal ceiling
+    4300012: Bedroom-RedGoldWall
+    4300014: Secret Room_L
+    4300016: Secret Room _B
+    4300018: Candleabra_MeshPart0
+    4300020: Candleabra_MeshPart1
+    4300022: Vase 009
+    4300024: Chandelier_MeshPart0
+    4300026: Chandelier_MeshPart1
+    4300028: Chandelier_MeshPart2
+    4300030: Chandelier_MeshPart3
+    4300032: Chandelier_Chain
+    4300034: Chandelier_arms
+    4300036: Chandelier001_MeshPart0
+    4300038: Chandelier001_MeshPart1
+    4300040: Chandelier001_MeshPart2
+    4300042: Chandelier001_MeshPart3
+    4300044: Chandelier_Chain001
+    4300046: Chandelier_arms001
+    4300048: Cone005
+    4300050: Vase 014
+    4300052: FIREPLACE
+    4300054: Cylinder010
+    4300056: Cylinder009
+    4300058: Cylinder011
+    4300060: Candleabra001_MeshPart0
+    4300062: Candleabra001_MeshPart1
+    4300064: Vase 015
+    4300066: Vase 016
+    4300068: Vase 017
+    4300070: Cone006
+    4300072: curtain
+    4300074: Cylinder012
+    4300076: Cylinder013
+    4300078: curtain001
+    4300080: Cylinder014
+    4300082: curtain002
+    4300084: curtain003
+    4300086: Cylinder015
+    4300088: Cylinder016
+    4300090: curtain004
+    4300092: curtain005
+    4300094: Cylinder017
+    4300096: pillow bottom
+    4300098: pillow left
+    4300100: Plane001
+    4300102: pillow top
+    4300104: pillow right
+    4300106: bed
+    4300108: Cylinder018
+    4300110: Object001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
