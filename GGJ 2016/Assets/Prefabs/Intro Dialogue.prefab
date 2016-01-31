@@ -1,0 +1,183 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &186228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 434016}
+  - 82: {fileID: 8277698}
+  - 114: {fileID: 11415710}
+  m_Layer: 0
+  m_Name: Intro Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &434016
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!82 &8277698
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186228}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!114 &11415710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec8390c65f164c4aba83a53e579301d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 8277698}
+  clips:
+  - {fileID: 8300000, guid: d16bd0d04f2674af2ae512523fc14cd8, type: 3}
+  - {fileID: 8300000, guid: 6675fb0c2a5c4432891eca22ec0720da, type: 3}
+  subtitles:
+  - Ha...I thought it was finally over.
+  - '...the laughing...the torment...'
+  - I thought that for once I would be able to do something right.
+  - I...I thought for once I could have... a little bit of luck
+  - But of course things never go right for me.
+  - Back in wizard school I was useless
+  - '...I wanted to show them that I was'
+  - the greatest wixard in the world. The one that is feared by his enemies and loved
+    by the ladies.
+  - '...but the only companion that'
+  - I have had is Liz...my lizard.
+  - And this is where everything went wrong.
+  - I found a ritual to transform Liz
+  - into a mighty dragon.
+  - That way I could finally get the fame that I long for and Liz would be big and
+    strong as well...at least so I thought.
+  - Liz where are you?!
+  - Liz!
+  - A few minutes later
+  - I heard noies from outside.
+  - It seems that the ritual caused more problems than I originally thought.
+  - It cursed the townsfolk!
+  - It turned all the women into old and grumpy Hags!
+  - '...by the looks of it they are on their way to my tower...oh no...I need to be
+    quick.'
+  - I need to find a way of reversing all of this!
+  - I need to get Liz back
+  - '...after all...she is the only one I have...'
+  - except for that stray cat.
+  timings:
+  - 5.02271748
+  - 2.63025761
+  - 4.46590424
+  - 6.17733574
+  - 4.1233139
+  - 3.47374344
+  - 2.77719879
+  - 8.06754684
+  - 3.21287155
+  - 3.59268951
+  - 3.68740463
+  - 2.62308121
+  - 1.39830017
+  - 11.432888
+  - 2.72636414
+  - .770698547
+  - 2.34043121
+  - 2.80452728
+  - 5.39003754
+  - 2.35725403
+  - 6.43322754
+  - 8.65457153
+  - 2.88440704
+  - 1.81903839
+  - 4.78979492
+  - 2.55905151
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 186228}
+  m_IsPrefabParent: 1
