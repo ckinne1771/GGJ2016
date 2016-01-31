@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.ImageEffects;
 using UnityEngine.UI;
+using System;
 
 public class SpellCombinationScript : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class SpellCombinationScript : MonoBehaviour
     bool element2Active = false;
     bool element3Active = false;
 
+	public float randomNum;
+
     bool maxSelection = false;
 
     int spellsSelected = 0;
@@ -24,18 +27,20 @@ public class SpellCombinationScript : MonoBehaviour
 
     public float freezeTimer = 3.0f;
     private bool isFrozen = false;
-    private bool isAlight = false;
+    public bool isAlight = false;
 
     public PauseScript pauseGame;
 
     //Heart Spell
     public GameObject HeartParticles;
     public float heartTimer = 5.0f;
-    private bool heartActive = false;
+    public bool heartActive = false;
+	public AudioClip heartSound;
 
     //Light Spell
     public float lightTimer = 10.0f;
     public GameObject selfLight;
+	//public bool lightActive = false;
 
     //Blind Spell
     public float blindTimer = 2.0f;
@@ -57,7 +62,8 @@ public class SpellCombinationScript : MonoBehaviour
     public BloomAndFlares BandF;
     public GameObject flash1stEffect;
     public float flash1stEffectTimer;
-    private bool flashBool = false;
+	public bool flashBool = false;
+	public AudioClip flashSound;
 
     //drunkMathew var.
     public float drunkTimer;
@@ -66,10 +72,17 @@ public class SpellCombinationScript : MonoBehaviour
     public float shake = 0;
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 1;
+	public AudioClip quakeSound;
 
     //Psy Spell
+	public GameObject soundObj;
     public bool isPsy;
     public float psyLimit;
+	public AudioClip psysound;
+	public AudioClip spellSound;
+
+
+	public InteractScript interactRune;
 
     //Spell Compelete
     private int castingLV;
@@ -106,51 +119,50 @@ public class SpellCombinationScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pauseGame.showButton == false)
-        {
-            //Making Spell
+		//randomNumber ();
+		if (pauseGame.showButton == false) {
+			//Making Spell
+			if (interactRune.Rune1.active == true) {
+				if (Input.GetKeyDown (KeyCode.Alpha1)) {
+					if (spellsSelected < 3) {
+						int el1 = 1;
+						spellCombinations.Add (el1);
+						spellsSelected++;
+					} else {
+						Debug.Log ("Spell Combinations Maxed");
+					}
+				}
+			} else {
+			}
+		}
+		if (interactRune.Rune2.active == true) {
+			
+				if (Input.GetKeyDown (KeyCode.Alpha2)) {
+					if (spellsSelected < 3) {
+						int el2 = 2;
+						spellCombinations.Add (el2);
+						spellsSelected++;
+					} else {
+						Debug.Log ("Spell Combinations Maxed");
+					}
+				}
+			else {
+			}
+		}  
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                if (spellsSelected < 3)
-                {
-                    int el1 = 1;
-                    spellCombinations.Add(el1);
-                    spellsSelected++;
-                }
-                else
-                {
-                    Debug.Log("Spell Combinations Maxed");
-                }
-            }
+		if (interactRune.Rune3.active == true) {
 
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                if (spellsSelected < 3)
-                {
-                    int el2 = 2;
-                    spellCombinations.Add(el2);
-                    spellsSelected++;
-                }
-                else
-                {
-                    Debug.Log("Spell Combinations Maxed");
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                if (spellsSelected < 3)
-                {
-                    int el3 = 3;
-                    spellCombinations.Add(el3);
-                    spellsSelected++;
-                }
-                else
-                {
-                    Debug.Log("Spell Combinations Maxed");
-                }
-            }
+			if (Input.GetKeyDown (KeyCode.Alpha3)) {
+				if (spellsSelected < 3) {
+					int el3 = 3;
+					spellCombinations.Add (el3);
+					spellsSelected++;
+				} else {
+					Debug.Log ("Spell Combinations Maxed");
+				}
+			} else {
+			}
+		}
 
             //Fire Spell
             if (Input.GetMouseButtonDown(0))
@@ -168,7 +180,7 @@ public class SpellCombinationScript : MonoBehaviour
                     Debug.Log("Not enough spells selected");
                 }
             }
-        }
+        
 
 
         //Paralyse Spell Eff.
@@ -193,7 +205,7 @@ public class SpellCombinationScript : MonoBehaviour
         else if (blindTimer <= 0)
         {
             isBlinded = false;
-            fpCamera.GetComponent<Camera>().cullingMask = (1);
+            fpCamera.GetComponent<Camera>().cullingMask = (-1);
             blindTimer = 4;
         }
 
@@ -267,7 +279,7 @@ public class SpellCombinationScript : MonoBehaviour
         //shake Spell Eff.
         if (shake > 0)
         {
-            fpCamera.transform.localPosition = Random.insideUnitSphere * shakeAmount;
+            fpCamera.transform.localPosition = UnityEngine.Random.insideUnitSphere * shakeAmount;
             shake -= Time.deltaTime * decreaseFactor;
         }
         else
@@ -356,7 +368,7 @@ public class SpellCombinationScript : MonoBehaviour
             paralysis();
         } else if (spellCombinations[0] == 3 && spellCombinations[1] == 3 && spellCombinations[2] == 2) {
             blindness();
-        } else if (spellCombinations[0] == 1 && spellCombinations[1] == 1 && spellCombinations[2] == 1) {
+        } else if (spellCombinations[0] == 1 && spellCombinations[1] == 1 && spellCombinations[2] == 2) {
             hearts();
         } else if (spellCombinations[0] == 1 && spellCombinations[1] == 1 && spellCombinations[2] == 3) {
             Flashed();
@@ -364,11 +376,11 @@ public class SpellCombinationScript : MonoBehaviour
             light();
         } else if (spellCombinations[0] == 2 && spellCombinations[1] == 1 && spellCombinations[2] == 3) {
             Screaming(); //Check
-        } else if (spellCombinations[0] == 3 && spellCombinations[1] == 1 && spellCombinations[2] == 1) {
+        } else if (spellCombinations[0] == 1 && spellCombinations[1] == 2 && spellCombinations[2] == 1) {
             drunkMathew(); //Check
-        } else if (spellCombinations[0] == 1 && spellCombinations[1] == 3 && spellCombinations[2] == 2) {
+        } else if (spellCombinations[0] == 1 && spellCombinations[1] == 1 && spellCombinations[2] == 1) {
             quakeState(); //Check
-        } else if (spellCombinations[0] == 1 && spellCombinations[1] == 2 && spellCombinations[2] == 2) {
+        } else if (spellCombinations[0] == 3 && spellCombinations[1] == 1 && spellCombinations[2] == 2) {
             psySpell();
         }
         else
@@ -405,6 +417,8 @@ public class SpellCombinationScript : MonoBehaviour
         {
             HeartParticles.SetActive(true);
             Debug.Log("GLORIOUS HEARTS!!!!");
+			GetComponent<AudioSource> ().PlayOneShot (heartSound);
+
         }
     }
 
@@ -413,6 +427,7 @@ public class SpellCombinationScript : MonoBehaviour
     {
         flashBool = true;
         Debug.Log("FLASH !");
+		GetComponent<AudioSource> ().PlayOneShot (flashSound);
     }
 
     //Light Spell
@@ -451,21 +466,33 @@ public class SpellCombinationScript : MonoBehaviour
     void quakeState()
     {
         shake = 1;
+		GetComponent<AudioSource> ().PlayOneShot (quakeSound);
     }
 
     //Psy Spell
     void psySpell()
     {
         fpCamera.GetComponent<ColorCorrectionCurves>().enabled = true;
+		GetComponent<AudioSource> ().PlayOneShot (psysound);
+
     }
 
     //other Spell?
     void otherSpell()
     {
-        Screaming();
+		soundObj.GetComponent<AudioSource> ().PlayOneShot (spellSound);
+
         drunkMathew();
         quakeState();
         psySpell();
     }
+
+	void randomNumber()
+
+	{
+		
+
+	}
+
 
 }
