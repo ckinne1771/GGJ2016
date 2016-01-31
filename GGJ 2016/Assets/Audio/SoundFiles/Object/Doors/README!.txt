@@ -1,0 +1,2 @@
+The door loop sounds should be stored in an AudioClip[] and called individually at random from the array.
+These sounds are for a specific door in game that is to be locked and never opened, as if something is trying to get out from the other side of the door.  
